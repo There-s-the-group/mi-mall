@@ -6,8 +6,8 @@
           <img v-lazy="msg.picUrl" :alt="msg.productName" :key="msg.picUrl">
         </a>
       </div>
-      <h6 class="good-title" v-html="msg.title">{{msg.title}}</h6>
-      <h3 class="sub-title ellipsis">{{msg.sellPoint}}</h3>
+      <h6 class="good-title" v-html="msg.productName">{{msg.productName}}</h6>
+      <h3 class="sub-title ellipsis">{{msg.subTitle}}</h3>
       <div class="good-price pr">
         <div class="ds pa">
           <a @click="openProduct(msg.productId)">
@@ -15,11 +15,11 @@
           </a>
           <y-button text="加入购物车"
                     style="margin: 0 5px"
-                    @btnClick="addCart(msg.productId,msg.price,msg.title,msg.picUrl)"
+                    @btnClick="addCart(msg.productId,msg.salePrice,msg.productName,msg.picUrl)"
                     classStyle="main-btn"
           ></y-button>
         </div>
-        <p><span style="font-size:14px">￥</span>{{Number(msg.price).toFixed(2)}}</p>
+        <p><span style="font-size:14px">￥</span>{{Number(msg.salePrice).toFixed(2)}}</p>
       </div>
     </div>
   </div>
