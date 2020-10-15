@@ -7,10 +7,10 @@ export const userLogin = (params) => {
 export const loginOut = (params) => {
   return http.fetchGet('/member/loginOut', params)
 }
-// 用户信息
-export const userInfo = (params) => {
-  return http.fetchGet('/member/checkLogin', params)
-}
+// // 用户信息
+// export const userInfo = (params) => {
+//   return http.fetchGet('/member/checkLogin', params)
+// }
 // 注册账号
 export const register = (params) => {
   return http.fetchPost('/member/register', params)
