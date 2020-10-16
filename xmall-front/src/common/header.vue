@@ -338,12 +338,17 @@
       _loginOut () {
         let params = {
           params: {
-            token: this.token
+            token: this.token,
+            id: getStore('userId')
           }
         }
+        console.log(params)
         loginOut(params).then(res => {
-          removeStore('buyCart')
-          window.location.href = '/'
+          if (res.result === 1) {
+            removeStore('buyCart')
+            removeStore('token')
+            window.location.href = '/'
+          }
         })
       },
       // 通过路由改变导航文字样式

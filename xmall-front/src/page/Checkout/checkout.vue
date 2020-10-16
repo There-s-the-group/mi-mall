@@ -335,14 +335,22 @@
     },
     created () {
       this.userId = getStore('userId')
-      let query = this.$route.query
-      if (query.productId && query.num) {
-        this.productId = query.productId
-        this.num = query.num
-        this._productDet(this.productId)
+      let list = this.$route.query
+      if (list.cartList.length > 0) {
+        // for (let item of cartList) {
+        //   console.log(item)
+        //   if (item.productId && item.num) {
+        //     console.log(1)
+        //     this.productId = item.productId
+        //     this.num = item.num
+        //     this._productDet(this.productId)
+        //   }
+        // }
+        this.cartList = list.cartList
       } else {
         this._getCartList()
       }
+      console.log(this.cartList)
       this._addressList()
     },
     components: {

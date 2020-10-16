@@ -206,7 +206,7 @@
             checked
           }
         ).then(res => {
-          if (res.success === true) {
+          if (res.code === 0) {
             this.EDIT_CART(
               {
                 productId,
@@ -244,7 +244,8 @@
       checkout () {
         this.checkoutNow = '结算中...'
         this.submit = false
-        this.$router.push({path: 'checkout'})
+
+        this.$router.push({path: 'checkout', query: {cartList: this.cartList}})
       },
       delChecked () {
         getCartList({userId: getStore('userId')}).then(res => {
@@ -266,6 +267,7 @@
     },
     mounted () {
       this.userId = getStore('userId')
+      console.log(this.userId)
       this.INIT_BUYCART()
     },
     components: {
