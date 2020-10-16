@@ -32,7 +32,7 @@
         type: [Number, String]
       },
       checked: {
-        type: [String, Boolean]
+        type: [String, Number]
       },
       limit: {
         type: Number,
