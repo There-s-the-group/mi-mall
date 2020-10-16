@@ -76,7 +76,7 @@
         product: {
           salePrice: 0
         },
-        productNum: 1,
+        buyNum: 1,
         userId: ''
       }
     },
@@ -97,14 +97,15 @@
       addCart (id, price, name, img) {
         if (!this.showMoveImg) {     // 动画是否在运动
           if (this.login) { // 登录了 直接存在用户名下
-            addCart({userId: this.userId, productId: id, productNum: this.productNum}).then(res => {
+            addCart({userId: this.userId, productId: id, buyNum: this.buyNum}).then(res => {
+              console.log(res)
               // 并不重新请求数据
               this.ADD_CART({
                 productId: id,
                 salePrice: price,
                 productName: name,
                 productImg: img,
-                productNum: this.productNum
+                buyNum: this.buyNum
               })
             })
           } else { // 未登录 vuex
@@ -113,7 +114,7 @@
               salePrice: price,
               productName: name,
               productImg: img,
-              productNum: this.productNum
+              buyNum: this.buyNum
             })
           }
           // 加入购物车动画
@@ -129,10 +130,10 @@
         }
       },
       checkout (productId) {
-        this.$router.push({path: '/checkout', query: {productId, num: this.productNum}})
+        this.$router.push({path: '/checkout', query: {productId, num: this.buyNum}})
       },
       editNum (num) {
-        this.productNum = num
+        this.buyNum = num
       }
     },
     components: {

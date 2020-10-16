@@ -142,7 +142,7 @@ export default {
           cartArr.push({
             userId: getStore('userId'),
             productId: item.productId,
-            productNum: item.productNum
+            buyNum: item.buyNum
           })
         })
       }

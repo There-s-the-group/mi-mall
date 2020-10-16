@@ -87,7 +87,7 @@
                                   </div>
                                   <div class="item-desc">
                                     <div class="cart-cell"><h4>
-                                      <a href="" v-text="item.productName"></a>
+                                      <a href="" v-text="item.buyNum"></a>
                                     </h4>
                                       <!-- <p class="attrs"><span>白色</span></p> -->
                                       <h6><span class="price-icon">¥</span><span
@@ -265,7 +265,7 @@
           }
           for (var i = 0; i < maxSize; i++) {
             var obj = {}
-            obj.value = res.hits.hits[i]._source.productName
+            obj.value = res.hits.hits[i]._source.buyNum
             array.push(obj)
           }
           if (array.length !== 0) {

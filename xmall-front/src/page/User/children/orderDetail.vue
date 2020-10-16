@@ -84,8 +84,8 @@
               </div>
               <div class="n-b">
                 <div class="price">¥ {{Number(item.salePrice).toFixed(2)}}</div>
-                <div class="goods-num">{{item.productNum}}</div>
-                <div class="subtotal"> ¥ {{Number(item.salePrice * item.productNum).toFixed(2)}}</div>
+                <div class="goods-num">{{item.buyNum}}</div>
+                <div class="subtotal"> ¥ {{Number(item.salePrice * item.buyNum).toFixed(2)}}</div>
               </div>
             </div>
           </div>
@@ -272,7 +272,7 @@
     border: 1px solid #EBEBEB;
     margin-left: -80px;
   }
-  
+
   img {
     display: block;
     @include wh(80px);

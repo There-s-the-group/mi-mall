@@ -79,9 +79,9 @@
         </div>
         <div class="n-b">
           <div class="price">¥ {{item.salePrice}}</div>
-          <div class="goods-num">{{item.productNum}}</div>
+          <div class="goods-num">{{item.buyNum}}</div>
           <div class="subtotal">
-            <div class="subtotal-cell"> ¥ {{item.salePrice * item.productNum}}<br></div>
+            <div class="subtotal-cell"> ¥ {{item.salePrice * item.buyNum}}<br></div>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@
         let totalPrice = 0
         this.cartList && this.cartList.forEach(item => {
           if (item.checked === '1') {
-            totalPrice += (item.productNum * item.salePrice)
+            totalPrice += (item.buyNum * item.salePrice)
           }
         })
         return totalPrice
