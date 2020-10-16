@@ -92,7 +92,7 @@
                                       <!-- <p class="attrs"><span>白色</span></p> -->
                                       <h6><span class="price-icon">¥</span><span
                                         class="price-num">{{item.salePrice}}</span><span
-                                        class="item-num">x {{item.productNum}}</span>
+                                        class="item-num">x {{item.buyNum}}</span>
                                       </h6></div>
                                   </div>
                                 </a>
@@ -182,7 +182,7 @@
       totalPrice () {
         var totalPrice = 0
         this.cartList && this.cartList.forEach(item => {
-          totalPrice += (item.productNum * item.salePrice)
+          totalPrice += (item.buyNum * item.salePrice)
         })
         return totalPrice
       },
@@ -190,7 +190,7 @@
       totalNum () {
         var totalNum = 0
         this.cartList && this.cartList.forEach(item => {
-          totalNum += (item.productNum)
+          totalNum += (item.buyNum)
         })
         return totalNum
       }
