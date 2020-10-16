@@ -27,15 +27,15 @@
                          placeholder="重复密码">
                 </div>
               </li>
-              <li>
-                <div id="captcha">
-                  <p id="wait">正在加载验证码...</p>
-                </div>
-              </li>
+<!--              <li>-->
+<!--                <div id="captcha">-->
+<!--                  <p id="wait">正在加载验证码...</p>-->
+<!--                </div>-->
+<!--              </li>-->
             </ul>
             <el-checkbox class="agree" v-model="agreement">
-              我已阅读并同意遵守 
-              <a @click="open('法律声明','此仅为个人练习开源模仿项目，仅供学习参考，承担不起任何法律问题')">法律声明</a> 和 
+              我已阅读并同意遵守
+              <a @click="open('法律声明','此仅为个人练习开源模仿项目，仅供学习参考，承担不起任何法律问题')">法律声明</a> 和
               <a @click="open('隐私条款','本网站将不会严格遵守有关法律法规和本隐私政策所载明的内容收集、使用您的信息')">隐私条款</a>
             </el-checkbox>
             <div style="margin-bottom: 30px;">
@@ -67,7 +67,7 @@
 <script>
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
-import { register, geetest } from '/api/index.js'
+import { register } from '/api/index.js'
 require('../../../static/geetest/gt.js')
 var captcha
 export default {
@@ -139,20 +139,17 @@ export default {
         this.registxt = '注册'
         return false
       }
-      var result = captcha.getValidate()
-      if (!result) {
-        this.message('请完成验证')
-        this.registxt = '注册'
-        return false
-      }
+      // var result = captcha.getValidate()
+      // if (!result) {
+      //   this.message('请完成验证')
+      //   this.registxt = '注册'
+      //   return false
+      // }
       register({
         userName,
         userPwd,
-        challenge: result.geetest_challenge,
-        validate: result.geetest_validate,
-        seccode: result.geetest_seccode,
         statusKey: this.statusKey }).then(res => {
-          if (res.success === true) {
+          if (res.result === 1) {
             this.messageSuccess()
             this.toLogin()
           } else {
@@ -162,29 +159,29 @@ export default {
             return false
           }
         })
-    },
-    init_geetest () {
-      geetest().then(res => {
-        this.statusKey = res.statusKey
-        window.initGeetest({
-          gt: res.gt,
-          challenge: res.challenge,
-          new_captcha: res.new_captcha,
-          offline: !res.success,
-          product: 'popup',
-          width: '100%'
-        }, function (captchaObj) {
-          captcha = captchaObj
-          captchaObj.appendTo('#captcha')
-          captchaObj.onReady(function () {
-            document.getElementById('wait').style.display = 'none'
-          })
-        })
-      })
     }
+    // init_geetest () {
+    //   geetest().then(res => {
+    //     this.statusKey = res.statusKey
+    //     window.initGeetest({
+    //       gt: res.gt,
+    //       challenge: res.challenge,
+    //       new_captcha: res.new_captcha,
+    //       offline: !res.success,
+    //       product: 'popup',
+    //       width: '100%'
+    //     }, function (captchaObj) {
+    //       captcha = captchaObj
+    //       captchaObj.appendTo('#captcha')
+    //       captchaObj.onReady(function () {
+    //         document.getElementById('wait').style.display = 'none'
+    //       })
+    //     })
+    //   })
+    // }
   },
   mounted () {
-    this.init_geetest()
+    // this.init_geetest()
   },
   components: {
     YFooter,

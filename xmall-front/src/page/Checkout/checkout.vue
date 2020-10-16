@@ -183,6 +183,18 @@
         })
         this.orderTotal = totalPrice
         return totalPrice
+      },
+      sortCartList () {
+        let i = 0
+        let item
+        for (i; i < this.cartList.length; i++) {
+          if (this.cartList[i].isDefault) {
+            item = this.cartList[i]
+            this.cartList.splice(i, 1)
+            break
+          }
+        }
+        this.cartList.unshift(item)
       }
     },
     methods: {
@@ -204,10 +216,15 @@
           let data = res.result
           if (data.length) {
             this.addList = data
-            this.addressId = data[0].addressId || '1'
-            this.userName = data[0].userName
-            this.tel = data[0].tel
-            this.streetName = data[0].streetName
+            console.log(this.addList)
+            for (let item of data) {
+              if (item.isDefault) {
+                this.addressId = item.addressId || '1'
+                this.userName = item.userName
+                this.tel = item.tel
+                this.streetName = item.streetName
+              }
+            }
           } else {
             this.addList = []
           }
@@ -220,7 +237,7 @@
       },
       _addressAdd (params) {
         addressAdd(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this._addressList()
           } else {
             this.message(res.message)
@@ -350,7 +367,6 @@
       } else {
         this._getCartList()
       }
-      console.log(this.cartList)
       this._addressList()
     },
     components: {
