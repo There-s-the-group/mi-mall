@@ -98,7 +98,6 @@
         if (!this.showMoveImg) {     // 动画是否在运动
           if (this.login) { // 登录了 直接存在用户名下
             addCart({userId: this.userId, productId: id, buyNum: this.buyNum}).then(res => {
-              console.log(res)
               // 并不重新请求数据
               this.ADD_CART({
                 productId: id,

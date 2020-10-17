@@ -117,7 +117,7 @@
           }
         }
         getAllGoods(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this.total = res.result.total
             this.goods = res.result.data
             this.noResult = false

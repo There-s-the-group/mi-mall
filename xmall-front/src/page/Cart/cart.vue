@@ -249,7 +249,7 @@
       },
       delChecked () {
         getCartList({userId: getStore('userId')}).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             res.result.forEach(item => {
               if (item.checked === '1') {
                 let productId = item.productId
@@ -267,7 +267,6 @@
     },
     mounted () {
       this.userId = getStore('userId')
-      console.log(this.userId)
       this.INIT_BUYCART()
     },
     components: {

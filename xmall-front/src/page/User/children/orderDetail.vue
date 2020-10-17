@@ -122,10 +122,11 @@
   </div>
 </template>
 <script>
-  import { getOrderDet, cancelOrder } from '/api/goods'
+  import { cancelOrder } from '/api/goods'
   import YShelf from '/components/shelf'
   import { getStore } from '/utils/storage'
   import countDown from '/components/countDown'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
@@ -146,6 +147,9 @@
         countTime: 0
       }
     },
+    computed: {
+      ...mapState(['orderDet'])
+    },
     methods: {
       message (m) {
         this.$message.error({
@@ -159,42 +163,41 @@
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)
       },
       _getOrderDet () {
-        let params = {
-          params: {
-            orderId: this.orderId
-          }
+        // let params = {
+        //   params: {
+        //     orderId: this.orderId
+        //   }
+        // }
+        let result = this.orderDet
+        if (result.orderStatus === '0') {
+          this.orderStatus = 1
+        } else if (result.orderStatus === '1') {
+          this.orderStatus = 2
+        } else if (result.orderStatus === '4') {
+          this.orderStatus = 5
+        } else if (result.orderStatus === '5') {
+          this.orderStatus = -1
+        } else if (result.orderStatus === '6') {
+          this.orderStatus = 6
         }
-        getOrderDet(params).then(res => {
-          if (res.result.orderStatus === '0') {
-            this.orderStatus = 1
-          } else if (res.result.orderStatus === '1') {
-            this.orderStatus = 2
-          } else if (res.result.orderStatus === '4') {
-            this.orderStatus = 5
-          } else if (res.result.orderStatus === '5') {
-            this.orderStatus = -1
-          } else if (res.result.orderStatus === '6') {
-            this.orderStatus = 6
-          }
-          this.orderList = res.result.goodsList
-          this.orderTotal = res.result.orderTotal
-          this.userName = res.result.addressInfo.userName
-          this.tel = res.result.addressInfo.tel
-          this.streetName = res.result.addressInfo.streetName
-          this.createTime = res.result.createDate
-          this.closeTime = res.result.closeDate
-          this.payTime = res.result.payDate
-          if (this.orderStatus === 5) {
-            this.finishTime = res.result.finishDate
-          } else {
-            this.countTime = res.result.finishDate
-          }
-          this.loading = false
-        })
+        this.orderList = result.goodsList
+        this.orderTotal = result.orderTotal
+        this.userName = result.addressInfo.userName
+        this.tel = result.addressInfo.tel
+        this.streetName = result.addressInfo.streetName
+        this.createTime = result.createDate
+        this.closeTime = result.closeDate
+        this.payTime = result.payDate
+        if (this.orderStatus === 5) {
+          this.finishTime = result.finishDate
+        } else {
+          this.countTime = result.finishDate
+        }
+        this.loading = false
       },
       _cancelOrder () {
         cancelOrder({orderId: this.orderId}).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this._getOrderDet()
           } else {
             this.message('取消失败')

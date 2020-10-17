@@ -6,7 +6,8 @@ import {
   ADD_ANIMATION,
   SHOW_CART,
   REDUCE_CART,
-  EDIT_CART
+  EDIT_CART,
+  ORDER_DET
 } from './mutation-types'
 import { setStore, getStore } from '../utils/storage'
 export default {
@@ -28,13 +29,11 @@ export default {
       productImg,
       buyNum
     }
-    console.log(cart.length)
     if (cart.length) {        // 有内容
       cart.forEach(item => {
         if (item.productId === productId) {
           if (item.buyNum > 0) {
             falg = false
-            console.log(item.buyNum)
             item.buyNum += buyNum
           }
         }
@@ -134,5 +133,8 @@ export default {
     } else {
       state.userInfo = null
     }
+  },
+  [ORDER_DET] (state, orderDet) {
+    state.orderDet = orderDet
   }
 }

@@ -216,7 +216,6 @@
           let data = res.result
           if (data.length) {
             this.addList = data
-            console.log(this.addList)
             for (let item of data) {
               if (item.isDefault) {
                 this.addressId = item.addressId || '1'
@@ -280,7 +279,7 @@
           orderTotal: this.orderTotal
         }
         submitOrder(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this.payment(res.result)
           } else {
             this.message(res.message)

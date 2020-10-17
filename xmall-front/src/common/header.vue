@@ -301,7 +301,6 @@
       // 登陆时获取一次购物车商品
       _getCartList () {
         getCartList({userId: getStore('userId')}).then(res => {
-          console.log(res)
           if (res.message === 'success') {
             setStore('buyCart', res.result)
           }

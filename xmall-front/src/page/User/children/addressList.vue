@@ -109,7 +109,7 @@
       },
       _addressAdd (params) {
         addressAdd(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this._addressList()
           } else {
             this.message(res.message)
@@ -136,7 +136,7 @@
       // 删除
       del (addressId, i) {
         addressDel({addressId: addressId}).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this.addList.splice(i, 1)
           } else {
             this.message('删除失败')
@@ -196,10 +196,10 @@
       color: #838383;
     }
     .address {
-      margin-left: 115px; 
+      margin-left: 115px;
     }
     .tel {
-      margin-left: 195px; 
+      margin-left: 195px;
     }
   }
 

@@ -175,7 +175,7 @@ export default {
           if (this.cart.length) {
             for (var i = 0; i < this.cart.length; i++) {
               addCart(this.cart[i]).then(res => {
-                if (res.success === true) {
+                if (res.message === 'success') {
                 }
               })
             }

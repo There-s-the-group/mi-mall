@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    
+
     <div v-loading="loading" element-loading-text="加载中..." style="min-height: 35vw;">
       <div  class="img-item" v-if="!noResult" >
         <!--商品-->
@@ -137,7 +137,7 @@
           }
         }
         getSearch(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this.goods = res.result.itemList
             this.total = res.result.recordCount
             this.noResult = false

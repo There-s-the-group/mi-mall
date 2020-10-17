@@ -152,7 +152,7 @@
           this.$refs.cropper.getCropData((data) => {
             this.imgSrc = data
             upload({userId: this.userId, token: this.token, imgData: data}).then(res => {
-              if (res.success === true) {
+              if (res.message === 'success') {
                 let path = res.result
                 let info = this.userInfo
                 info.file = path

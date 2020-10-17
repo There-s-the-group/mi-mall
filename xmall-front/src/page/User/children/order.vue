@@ -18,7 +18,7 @@
               </div>
               <div class="last">
                 <span class="sub-total">实付金额</span>
-                <span class="order-detail"> <a @click="orderDetail(item.orderId)">查看详情 ><em class="icon-font"></em></a> </span>
+                <span class="order-detail"> <a @click="orderDetail(item)">查看详情 ><em class="icon-font"></em></a> </span>
               </div>
             </div>
             <div class="pr">
@@ -76,6 +76,7 @@
   import { orderList, delOrder } from '/api/goods'
   import YShelf from '/components/shelf'
   import { getStore } from '/utils/storage'
+  import { mapMutations } from 'vuex'
   export default {
     data () {
       return {
@@ -89,6 +90,7 @@
       }
     },
     methods: {
+      ...mapMutations(['ORDER_DET']),
       message (m) {
         this.$message.error({
           message: m
@@ -108,11 +110,12 @@
       goodsDetails (id) {
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)
       },
-      orderDetail (orderId) {
+      orderDetail (item) {
+        this.ORDER_DET(item)
         this.$router.push({
           path: 'orderDetail',
           query: {
-            orderId: orderId
+            orderId: item.orderId
           }
         })
       },
@@ -152,7 +155,7 @@
           }
         }
         delOrder(params).then(res => {
-          if (res.success === true) {
+          if (res.message === 'success') {
             this.orderList.splice(i, 1)
           } else {
             this.message('删除失败')
