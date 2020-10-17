@@ -106,6 +106,7 @@
         if (this.max !== '') {
           this.max = Math.floor(this.max)
         }
+        console.log(this.sort)
         let params = {
           params: {
             page: this.currentPage,
@@ -117,6 +118,7 @@
           }
         }
         getAllGoods(params).then(res => {
+          console.log(res)
           if (res.message === 'success') {
             this.total = res.result.total
             this.goods = res.result.data
@@ -163,6 +165,7 @@
       this.windowWidth = window.innerWidth
       this._getAllGoods()
       recommend().then(res => {
+        console.log(res)
         let data = res.result
         this.recommendPanel = data[0]
       })
