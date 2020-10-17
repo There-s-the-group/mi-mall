@@ -182,7 +182,7 @@
           }
         })
         this.orderTotal = totalPrice
-        return totalPrice
+        return totalPrice.toFixed(2)
       },
       sortCartList () {
         let i = 0
