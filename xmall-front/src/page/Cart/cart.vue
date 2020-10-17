@@ -164,7 +164,7 @@
             totalPrice += (item.buyNum * item.salePrice)
           }
         })
-        return totalPrice
+        return totalPrice.toFixed(2)
       },
       // 选中的商品数量
       checkNum () {
@@ -191,7 +191,7 @@
       },
       // 全选
       editCheckAll () {
-        let checkAll = !this.checkAllFlag
+        let checkAll = !this.checkAllFlag === true ? 1 : 0
         editCheckAll({userId: this.userId, checked: checkAll}).then(res => {
           this.EDIT_CART({checked: checkAll})
         })

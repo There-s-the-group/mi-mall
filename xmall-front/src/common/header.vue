@@ -184,7 +184,7 @@
         this.cartList && this.cartList.forEach(item => {
           totalPrice += (item.buyNum * item.salePrice)
         })
-        return totalPrice
+        return totalPrice.toFixed(2)
       },
       // 计算数量
       totalNum () {
