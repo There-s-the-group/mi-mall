@@ -22,7 +22,7 @@
                 @keydown.enter.native="handleIconClick">
               </el-autocomplete>
               <router-link to="/goods"><a @click="changePage(2)">全部商品</a></router-link>
-              <router-link to="/thanks"><a @click="changePage(4)">捐赠</a></router-link>
+<!--              <router-link to="/thanks"><a @click="changePage(4)">捐赠</a></router-link>-->
               <!-- <router-link to="/">Smartisan M1 / M1L</router-link>
               <router-link to="/">Smartisan OS</router-link>
               <router-link to="/">欢喜云</router-link>
@@ -39,10 +39,10 @@
                       <!--头像-->
                       <li class="nav-user-avatar">
                         <div>
-                          <span class="avatar" :style="{backgroundImage:'url('+userInfo.info.file+')'}">
+                          <span class="avatar" :style="{backgroundImage:'url('+userInfo.file+')'}">
                           </span>
                         </div>
-                        <p class="name">{{userInfo.info.username}}</p>
+                        <p class="name">{{userInfo.username}}</p>
                       </li>
                       <li>
                         <router-link to="/user/orderList">我的订单</router-link>
@@ -196,7 +196,7 @@
       }
     },
     methods: {
-      ...mapMutations(['ADD_CART', 'INIT_BUYCART', 'ADD_ANIMATION', 'SHOW_CART', 'REDUCE_CART', 'RECORD_USERINFO', 'EDIT_CART']),
+      ...mapMutations(['ADD_CART', 'INIT_BUYCART', 'ADD_ANIMATION', 'SHOW_CART', 'REDUCE_CART', 'RECORD_USERINFO', 'EDIT_CART', 'LOGIN_CHANGE']),
       handleIconClick (ev) {
         if (this.$route.path === '/search') {
           this.$router.push({
@@ -342,11 +342,11 @@
             id: getStore('userId')
           }
         }
-        console.log(params)
         loginOut(params).then(res => {
           if (res.result === 1) {
             removeStore('buyCart')
             removeStore('token')
+            this.LOGIN_CHANGE(false)
             window.location.href = '/'
           }
         })

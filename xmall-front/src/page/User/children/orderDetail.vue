@@ -180,7 +180,6 @@
         //   }
         // }
         let result = this.orderDet
-        console.log(this.orderDet)
         if (result.orderStatus === '0') {
           this.orderStatus = 1
         } else if (result.orderStatus === '1') {

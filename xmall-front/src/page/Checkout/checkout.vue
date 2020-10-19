@@ -142,6 +142,7 @@
   import YHeader from '/common/header'
   import YFooter from '/common/footer'
   import { getStore } from '/utils/storage'
+  import { mapMutations } from 'vuex'
   export default {
     data () {
       return {
@@ -198,6 +199,7 @@
       }
     },
     methods: {
+      ...mapMutations(['ORDER_DET']),
       message (m) {
         this.$message.error({
           message: m
@@ -278,7 +280,18 @@
           goodsList: array,
           orderTotal: this.orderTotal
         }
+        let item = {
+          addressInfo: {
+            addressId: this.addressId,
+            userName: this.userName,
+            tel: this.tel,
+            streetName: this.streetName
+          },
+          goodsList: array,
+          orderTotal: this.orderTotal
+        }
         submitOrder(params).then(res => {
+          this.ORDER_DET(item)
           if (res.message === 'success') {
             this.payment(res.result)
           } else {

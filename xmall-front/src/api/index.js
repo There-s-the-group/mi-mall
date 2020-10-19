@@ -17,11 +17,11 @@ export const register = (params) => {
 }
 // 上传图片
 export const upload = (params) => {
-  return http.fetchPost('/member/imgaeUpload', params)
+  return http.imgPost('/member/imgaeUpload', params)
 }
 // 修改头像
 export const updateheadimage = (params) => {
-  return http.fetchPost('/member/updateheadimage', params)
+  return http.imgPost('/member/updateheadimage', params)
 }
 // 捐赠列表
 export const thanksList = (params) => {

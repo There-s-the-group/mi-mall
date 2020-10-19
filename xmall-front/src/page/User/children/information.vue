@@ -3,7 +3,7 @@
     <y-shelf title="账户资料">
       <div slot="content">
         <div class="avatar-box">
-          <div class=img-box><img :src="userInfo.info.file" alt=""></div>
+          <div class=img-box><img :src="userInfo.file" alt=""></div>
           <div class="r-box">
             <h3 style="margin-left: 13px;">修改头像</h3>
             <y-button text="上传头像" classStyle="main-btn" style="margin: 0;" @btnClick="editAvatar()"></y-button>
@@ -149,10 +149,14 @@
       cropper () {
         this.message('上传中...')
         if (this.option.img) {
-          this.$refs.cropper.getCropData((data) => {
+          this.$refs.cropper.getCropBlob((data) => {
             this.imgSrc = data
-            upload({userId: this.userId, token: this.token, imgData: data}).then(res => {
-              if (res.message === 'success') {
+            let formData = new FormData()
+            formData.append('userId', this.userId)
+            formData.append('imgData', data)
+            upload(formData).then(res => {
+              console.log(res)
+              if (res.message === '上传成功') {
                 let path = res.result
                 let info = this.userInfo
                 info.file = path

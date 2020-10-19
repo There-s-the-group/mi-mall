@@ -8,8 +8,8 @@
         <div class="account-sidebar">
           <div class="avatar gray-box ">
             <div>
-              <img :src="userInfo.info.file"> <h5>
-              {{userInfo.info.username}}</h5></div>
+              <img :src="userInfo.file"> <h5>
+              {{userInfo.username}}</h5></div>
             <div class="box-inner">
               <ul class="account-nav">
                 <li v-for="(item,i) in nav" :key='i' :class="{current:item.name===title}"

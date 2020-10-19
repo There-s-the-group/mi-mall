@@ -7,10 +7,14 @@ import {
   SHOW_CART,
   REDUCE_CART,
   EDIT_CART,
-  ORDER_DET
+  ORDER_DET,
+  LOGIN_CHANGE
 } from './mutation-types'
 import { setStore, getStore } from '../utils/storage'
 export default {
+  [LOGIN_CHANGE] (state, flag = false) {
+    state.login = flag
+  },
   // 网页初始化时从本地缓存获取购物车数据
   [INIT_BUYCART] (state) {
     let initCart = getStore('buyCart')

@@ -58,6 +58,7 @@ import YFooter from '/common/footer'
 import YButton from '/components/YButton'
 import { userLogin, geetest } from '/api/index.js'
 import { addCart } from '/api/goods.js'
+import {mapMutations} from 'vuex'
 import { setStore, getStore, removeStore } from '/utils/storage.js'
 require('../../../static/geetest/gt.js')
 var captcha
@@ -88,6 +89,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['RECORD_USERINFO', 'LOGIN_CHANGE']),
     open (t, m) {
       this.$notify.info({
         title: t,
@@ -171,6 +173,8 @@ export default {
         if (res.code === 0) {
           setStore('token', res.result.token)
           setStore('userId', res.result.id)
+          this.RECORD_USERINFO(res.result)
+          this.LOGIN_CHANGE(true)
           // 登录后添加当前缓存中的购物车
           if (this.cart.length) {
             for (var i = 0; i < this.cart.length; i++) {

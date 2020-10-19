@@ -168,7 +168,6 @@
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)
       },
       _getOrderDet (orderId) {
-        console.log(this.orderDet)
         this.cartList = this.orderDet.goodsList
         this.userName = this.orderDet.addressInfo.userName
         this.tel = this.orderDet.addressInfo.tel
