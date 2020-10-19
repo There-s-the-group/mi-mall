@@ -45,7 +45,7 @@
               <div class="prod-operation pa" style="right: 0;top: 0;">
                 <div class="total">¥ {{item.orderTotal}}</div>
                 <div v-if="item.orderStatus === '0'">
-                  <el-button @click="orderPayment(item.orderId)" type="primary" size="small">现在付款</el-button>
+                  <el-button @click="orderPayment(item.orderId,item)" type="primary" size="small">现在付款</el-button>
                 </div>
                 <div class="status" v-if="item.orderStatus !== '0'"> {{getOrderStatus(item.orderStatus)}}  </div>
               </div>
@@ -104,8 +104,19 @@
         this.currentPage = val
         this._orderList()
       },
-      orderPayment (orderId) {
-        window.open(window.location.origin + '#/order/payment?orderId=' + orderId)
+      orderPayment (orderId, item) {
+        this.ORDER_DET(item)
+        this.$router.push({path: '/order/payment',
+          query: {orderId: orderId},
+          params:
+          {
+            orderTotal: this.orderTotal,
+            userName: this.userName,
+            tel: this.tel,
+            orderList: this.orderList,
+            streetName: this.streetName
+          }
+        })
       },
       goodsDetails (id) {
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)

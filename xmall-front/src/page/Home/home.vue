@@ -181,6 +181,7 @@
         for (let i = 0; i < data.length; i++) {
           if (data[i].type === 0) {
             this.banner = data[i].panelContents
+            console.log(data[i].panelContents)
           }
         }
       })

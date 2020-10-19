@@ -157,7 +157,18 @@
         })
       },
       orderPayment (orderId) {
-        window.open(window.location.origin + '#/order/payment?orderId=' + orderId)
+        this.$router.push({path: '/order/payment',
+          query: {orderId: orderId},
+          params:
+          {
+            orderTotal: this.orderTotal,
+            userName: this.userName,
+            tel: this.tel,
+            orderList: this.orderList,
+            streetName: this.streetName
+          }
+        })
+        // window.open(window.location.origin + '#/order/payment?orderId=' + orderId)
       },
       goodsDetails (id) {
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)
@@ -169,6 +180,7 @@
         //   }
         // }
         let result = this.orderDet
+        console.log(this.orderDet)
         if (result.orderStatus === '0') {
           this.orderStatus = 1
         } else if (result.orderStatus === '1') {

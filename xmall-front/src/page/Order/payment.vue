@@ -3,18 +3,14 @@
     <y-shelf title="支付订单">
       <div slot="content">
         <div class="box-inner order-info">
-          <h3>提交订单成功，请填写捐赠信息</h3>
+          <h3>提交订单成功，请填写付款信息</h3>
           <p class="payment-detail">请在 <span>24 小时内</span>完成支付，超时订单将自动取消。</p>
           <p class="payment-detail">我们不会在您完成支付后的 72 小时内发货，您的支付将用作捐赠</p>
-          <p class="payment-detail" style="color:red">请仔细填写捐赠信息，避免系统审核失败无法在捐赠名单中显示您的数据</p>
         </div>
         <div class="pay-info">
           <span style="color:red">*</span> 昵称：<el-input v-model="nickName" placeholder="请输入您的昵称" @change="checkValid" :maxlength="maxLength" class="input"></el-input><br>
-          <span style="color:red">*</span> 捐赠金额：<el-select class="money-select" v-model="moneySelect" placeholder="请选择支付金额" @change="changeSelect">
-            <el-option label="￥0.10 我是穷逼" value="0.10"></el-option>
-            <el-option label="￥1.00 支付测试" value="1.00"></el-option>
-            <el-option label="￥5.00 感谢捐赠" value="5.00"></el-option>
-            <el-option label="￥10.00 感谢大佬" value="10.00"></el-option>
+          <span style="color:red">*</span> 支付金额：<el-select class="money-select" v-model="moneySelect" placeholder="请选择支付金额" @change="changeSelect">
+
             <el-option label="自定义 随意撒币" value="custom"></el-option>
           </el-select><br>
           <div v-if="moneySelect === 'custom'"><span style="color:red">*</span> 输入金额：<el-input v-model="money" placeholder="请输入捐赠金额(最多2位小数，不得低于0.1元)" @change="checkValid" :maxlength="maxLength" class="input" style="margin-left:10px"></el-input><br></div>
@@ -37,7 +33,7 @@
               <span>
                 订单金额：
               </span>
-              <em><span>¥</span>{{orderTotal.toFixed(2)}}</em>
+              <em><span>¥</span>{{allPrice}}</em>
               <span>
                 实际应付金额：
               </span>
@@ -98,8 +94,9 @@
 <script>
   import YShelf from '/components/shelf'
   import YButton from '/components/YButton'
-  import { getOrderDet, payMent } from '/api/goods'
+  import { payMent } from '/api/goods'
   import { getStore, setStore } from '/utils/storage'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
@@ -137,7 +134,13 @@
           }
         })
         return totalPrice
-      }
+      },
+      allPrice () {
+        return this.orderTotal
+      },
+      ...mapState([
+        'orderDet'
+      ])
     },
     methods: {
       checkValid () {
@@ -165,18 +168,12 @@
         window.open(window.location.origin + '#/goodsDetails?productId=' + id)
       },
       _getOrderDet (orderId) {
-        let params = {
-          params: {
-            orderId: this.orderId
-          }
-        }
-        getOrderDet(params).then(res => {
-          this.cartList = res.result.goodsList
-          this.userName = res.result.addressInfo.userName
-          this.tel = res.result.addressInfo.tel
-          this.streetName = res.result.addressInfo.streetName
-          this.orderTotal = res.result.orderTotal
-        })
+        console.log(this.orderDet)
+        this.cartList = this.orderDet.goodsList
+        this.userName = this.orderDet.addressInfo.userName
+        this.tel = this.orderDet.addressInfo.tel
+        this.streetName = this.orderDet.addressInfo.streetName
+        this.orderTotal = this.orderDet.orderTotal
       },
       paySuc () {
         this.payNow = '支付中...'
