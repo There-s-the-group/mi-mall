@@ -79,6 +79,7 @@
   import product from '/components/product'
   import mallGoods from '/components/mallGoods'
   import { setStore, getStore } from '/utils/storage.js'
+  import {mapMutations} from 'vuex'
   export default {
     data () {
       return {
@@ -99,6 +100,7 @@
       }
     },
     methods: {
+      ...mapMutations(['RECORD_USERINFO', 'LOGIN_CHANGE']),
       autoPlay () {
         this.mark++
         if (this.mark > this.banner.length - 1) {
@@ -176,6 +178,8 @@
           return
         }
         let data = res.result
+        let userInfo = getStore('userInfo')
+        this.RECORD_USERINFO(JSON.parse(userInfo))
         this.home = data
         this.loading = false
         for (let i = 0; i < data.length; i++) {

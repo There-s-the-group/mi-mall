@@ -68,6 +68,7 @@
 import YFooter from '/common/footer'
 import YButton from '/components/YButton'
 import { register } from '/api/index.js'
+import {mapMutations} from 'vuex'
 require('../../../static/geetest/gt.js')
 var captcha
 export default {
@@ -97,6 +98,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['RECORD_USERINFO', 'LOGIN_CHANGE']),
     open (t, m) {
       this.$notify.info({
         title: t,
@@ -149,7 +151,9 @@ export default {
         userName,
         userPwd,
         statusKey: this.statusKey }).then(res => {
+          console.log(res)
           if (res.result === 1) {
+            // setStore('token', 'login_success')
             this.messageSuccess()
             this.toLogin()
           } else {

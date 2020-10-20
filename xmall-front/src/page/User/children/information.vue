@@ -80,7 +80,7 @@
   import YShelf from '/components/shelf'
   import vueCropper from 'vue-cropper'
   import { mapState, mapMutations } from 'vuex'
-  import { getStore } from '/utils/storage'
+  import { getStore, setStore } from '/utils/storage'
   export default {
     data () {
       return {
@@ -156,11 +156,14 @@
             formData.append('imgData', data)
             upload(formData).then(res => {
               console.log(res)
-              if (res.message === '上传成功') {
-                let path = res.result
+              if (res.data.message === '上传成功') {
+                let path = res.data.result
                 let info = this.userInfo
-                info.file = path
-                this.RECORD_USERINFO({info: info})
+                console.log(info)
+                info.path = path
+                console.log(info.path)
+                setStore('userInfo', info)
+                this.RECORD_USERINFO(info)
                 this.editAvatarShow = false
                 this.messageSuccess('上传成功')
               } else {

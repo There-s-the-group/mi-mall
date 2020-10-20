@@ -173,6 +173,7 @@ export default {
         if (res.code === 0) {
           setStore('token', res.result.token)
           setStore('userId', res.result.id)
+          setStore('userInfo', res.result)
           this.RECORD_USERINFO(res.result)
           this.LOGIN_CHANGE(true)
           // 登录后添加当前缓存中的购物车

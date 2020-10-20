@@ -39,7 +39,7 @@
                       <!--头像-->
                       <li class="nav-user-avatar">
                         <div>
-                          <span class="avatar" :style="{backgroundImage:'url('+userInfo.file+')'}">
+                          <span class="avatar" :style="{backgroundImage:'url('+userInfo.path+')'}">
                           </span>
                         </div>
                         <p class="name">{{userInfo.username}}</p>

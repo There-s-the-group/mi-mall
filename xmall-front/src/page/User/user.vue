@@ -8,7 +8,7 @@
         <div class="account-sidebar">
           <div class="avatar gray-box ">
             <div>
-              <img :src="userInfo.file"> <h5>
+              <img :src="userInfo.path"> <h5>
               {{userInfo.username}}</h5></div>
             <div class="box-inner">
               <ul class="account-nav">
@@ -57,6 +57,7 @@
       }
     },
     created () {
+      console.log(this.userInfo.path)
       let path = this.$route.path.split('/')[2]
       this.nav.forEach(item => {
         if (item.path === path) {
